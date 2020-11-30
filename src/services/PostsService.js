@@ -9,8 +9,15 @@ const PostsService = (function () {
     return responseData;
   }
 
+  async function getComments(postId) {
+    const responseData = await JSONPlaceHolder.getCommentsByPostId(postId);
+
+    return responseData;
+  }
+
   return {
     getPosts,
+    getComments,
   };
 }());
 

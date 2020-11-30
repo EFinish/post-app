@@ -23,14 +23,10 @@ export default new Vuex.Store({
     async initPosts(context) {
       const posts = await PostsService.getPosts();
 
-      console.log('possts', posts);
-
       context.commit('setPosts', posts);
     },
     async initUsers(context) {
       const users = await UsersService.getUsers();
-
-      console.log('users', users);
 
       context.commit('setUsers', users);
     },

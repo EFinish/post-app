@@ -15,16 +15,38 @@
                         <p>{{ post.body }}</p>
                     </b-col>
                 </b-row>
+                <b-row>
+                    <b-col>
+                        <b-button
+                            variant="primary"
+                            v-on:click="switchShowComments">
+                            Comments
+                        </b-button>
+                    </b-col>
+                </b-row>
+                <PostComments v-if="showComments" :postId="post.id" />
             </b-col>
         </b-row>
     </transition>
 </template>
 
 <script>
+import PostComments from './PostComments.vue';
 
 export default {
   name: 'Post',
+  components: {
+    PostComments,
+  },
+  data: () => ({
+    showComments: false,
+  }),
   props: ['post', 'user'],
+  methods: {
+    switchShowComments() {
+      this.showComments = !this.showComments;
+    },
+  },
 };
 </script>
 
@@ -37,7 +59,7 @@ export default {
 }
 .post {
     border: 1px #dedede solid;
-    border-radius: 25px;
+    border-radius: 12px;
     margin: 10px 0px;
     padding: 10px;
 }

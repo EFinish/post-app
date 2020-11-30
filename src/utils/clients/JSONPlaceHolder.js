@@ -15,13 +15,25 @@ const JSONPlaceHolder = (function () {
     }
   }
 
+  async function getCommentsByPostId(postId) {
+    try {
+      const response = await axios.get(`${apiPrefix}/posts/${postId}/comments`);
+
+      return response.data;
+    } catch (error) {
+      alert(`Error! Error while fetching post comments. ${error}`);
+
+      return null;
+    }
+  }
+
   async function getUsers() {
     try {
       const response = await axios.get(`${apiPrefix}/users`);
 
       return response.data;
     } catch (error) {
-      alert(`Error! Error while fetching posts. ${error}`);
+      alert(`Error! Error while fetching users. ${error}`);
 
       return null;
     }
@@ -30,6 +42,7 @@ const JSONPlaceHolder = (function () {
   return {
     getPosts,
     getUsers,
+    getCommentsByPostId,
   };
 }());
 
