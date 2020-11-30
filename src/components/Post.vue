@@ -54,7 +54,6 @@ export default {
 .post:hover {
     background-color: lightcyan;
     box-shadow: 0 0 6px black;
-    cursor: default;
     transition: all .2s ease;
 }
 .post {

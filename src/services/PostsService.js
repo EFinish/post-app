@@ -15,9 +15,16 @@ const PostsService = (function () {
     return responseData;
   }
 
+  async function deleteComment(commentId) {
+    const responseData = await JSONPlaceHolder.deleteComment(commentId);
+
+    return responseData;
+  }
+
   return {
     getPosts,
     getComments,
+    deleteComment,
   };
 }());
 

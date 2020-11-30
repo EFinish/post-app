@@ -27,6 +27,18 @@ const JSONPlaceHolder = (function () {
     }
   }
 
+  async function deleteComment(commentId) {
+    try {
+      await axios.delete(`${apiPrefix}/comments/${commentId}`);
+
+      return true;
+    } catch (error) {
+      alert(`Error! Error while deleting comment. ${error}`);
+
+      return null;
+    }
+  }
+
   async function getUsers() {
     try {
       const response = await axios.get(`${apiPrefix}/users`);
@@ -41,8 +53,9 @@ const JSONPlaceHolder = (function () {
 
   return {
     getPosts,
-    getUsers,
     getCommentsByPostId,
+    deleteComment,
+    getUsers,
   };
 }());
 

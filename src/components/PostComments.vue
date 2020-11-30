@@ -9,10 +9,27 @@
                     class="post-comment">
                     <b-col>
                         <b-row>
-                            <b-col md="3">
+                            <b-col>
                                 <i>{{ comment.email }}</i>
                             </b-col>
-                            <b-col md="9">
+                            <b-col
+                                class="text-right">
+                                <b-button
+                                v-if="!isCommentDeleted(comment.id)"
+                                variant="secondary"
+                                v-on:click="deleteComment(comment.id)">
+                                    Delete
+                                </b-button>
+                                <b-button
+                                v-if="isCommentDeleted(comment.id)"
+                                variant="secondary"
+                                disabled>
+                                    Deleted!
+                                </b-button>
+                            </b-col>
+                        </b-row>
+                        <b-row>
+                            <b-col>
                                 {{comment.name}}
                             </b-col>
                         </b-row>
@@ -36,9 +53,22 @@ export default {
   props: ['postId'],
   data: () => ({
     comments: [],
+    deletedComments: [],
   }),
   async mounted() {
     this.comments = await PostsService.getComments(this.postId);
+  },
+  methods: {
+    async deleteComment(commentId) {
+      const success = await PostsService.deleteComment(commentId);
+
+      if (success) {
+        this.deletedComments.push(commentId);
+      }
+    },
+    isCommentDeleted(commentId) {
+      return this.deletedComments.indexOf(commentId) > -1;
+    },
   },
 };
 </script>
@@ -46,7 +76,6 @@ export default {
 <style scoped>
 .post-comment:hover {
     box-shadow: 0 0 6px black;
-    cursor: default;
     transition: all .2s ease;
 }
 .post-comment {
