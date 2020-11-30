@@ -17,7 +17,7 @@
                                 <b-button
                                 v-if="!isCommentDeleted(comment.id)"
                                 variant="secondary"
-                                v-on:click="deleteComment(comment.id)">
+                                v-on:click="deleteComment(comment.id); addButtonClick();">
                                     Delete
                                 </b-button>
                                 <b-button
@@ -68,6 +68,9 @@ export default {
     },
     isCommentDeleted(commentId) {
       return this.deletedComments.indexOf(commentId) > -1;
+    },
+    addButtonClick() {
+      this.$store.dispatch('addButtonClick');
     },
   },
 };

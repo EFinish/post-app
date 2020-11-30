@@ -19,7 +19,7 @@
                     <b-col>
                         <b-button
                             variant="primary"
-                            v-on:click="switchShowComments">
+                            v-on:click="switchShowComments(); addButtonClick();">
                             Comments
                         </b-button>
                     </b-col>
@@ -45,6 +45,9 @@ export default {
   methods: {
     switchShowComments() {
       this.showComments = !this.showComments;
+    },
+    addButtonClick() {
+      this.$store.dispatch('addButtonClick');
     },
   },
 };
